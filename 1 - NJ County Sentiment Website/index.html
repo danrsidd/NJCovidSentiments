@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>COVID-19 Sentiments | Home</title>
+</head>
+<body>
+<!-- Navigation -->
+<div class="vertical-nav bgblack" id="sidebar">
+    <div class="py-4 px-3 mb-4 bgblack">
+      <div class="media d-flex align-items-center">
+        <div class="media-body">
+          <h4 class="m-0 text-light logoText"><a class="text-light" href="index.html">NJCOVIDSENTIMENTS</a></h4>
+          <p class="font-weight-light text-muted mb-0">Predicting COVID-19 Cases with Twitter</p>
+          <h6 class="font-weight-light text-muted" id="copyright">&copy; 2020 DS</h6>
+        </div>
+      </div>
+    </div>
+    <ul class="nav flex-column bgblack mb-0" id="navbar">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link active" id="navLinks"><i class="fa fa-home mr-3 text-primary fa-fw"></i>Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="data.html" class="nav-link" id="navLinks"><i class="fa fa-database mr-3 text-primary fa-fw"></i>Data & Findings</a>
+      </li>
+      <li class="nav-item">
+        <a href="code.html" class="nav-link" id="navLinks"><i class="fa fa-terminal mr-3 text-primary fa-fw"></i>Code</a>
+      </li>
+      <li class="nav-item">
+        <a href="live.html" class="nav-link" id="navLinks"><i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>Live Data</a>
+      </li>
+      <li class="nav-item">
+        <a href="references.html" class="nav-link" id="navLinks"><i class="fa fa-book mr-3 text-primary fa-fw"></i>References</a>
+      </li>
+    </ul>
+  </div>
+  <!-- Navigation End -->
+  <!-- Page content -->
+  <div class="page-content p-5" id="content">
+    <!-- Toggle button -->
+    <button id="sidebarCollapse" type="button" class="btn btn-dark bgblack rounded-pill shadow-sm px-3 mb-4"><i class="fa fa-bars mr-.5"></i></button>
+    <!-- Main -->
+    <div class="row text-black">
+      <div class="col-lg-11">
+        <!-- Back to top button -->
+        <a id="backToTop"></a>
+        <!-- Back to top button end -->
+        <h1>Using Twitter to Predict COVID-19 in New Jersey</h1>
+        <br>
+        <div class="text-center">
+          <img src="./images/logo.png" alt="" width="200" height="200" class="img-fluid">
+          <img src="./images/njlogo.png" alt="" width="106" height="200" class="img-fluid">
+        </div>
+        <hr>
+        <p><b>TL;DR:</b> This project’s main objective was to utilize Twitter sentiment analysis to predict the prominence of COVID-19 cases in each of New Jersey’s 21 counties. This project has positive implications on the way we approach outbreak identification and hints at the communal power of individual sentiments.</p>
+        <hr>
+        <h2>Introduction & Background</h2>
+        <hr>
+        <p>This project stemmed from prior course experimentation with Twitter sentiment analysis. Recognizing the potential of computational analytical power, the plethora of available libraries and APIs enabling such a methodology to be applied, and the prominence of COVID-19 around the globe, it was decided that COVID-19 tweets would be analyzed. To limit the scope of the project and determine whether sentiment analysis predictions possessed any practical viability for COVID-19 cases, this project was limited to the State of New Jersey and its 21 counties.</p>
+        <hr>
+        <h2>Hypothesis & Research Question</h2>
+        <hr>
+        <ul>
+          <li><b>Research Question:</b> Can positive and negative Twitter sentiments influence the number of COVID-19 cases in New Jersey, at the county level?</li>
+          <li><b>H<sub>0</sub> (Null Hypothesis):</b> Twitter sentiments do not influence the number of COVID-19 cases in New Jersey counties.</li>
+          <li><b>H<sub>1</sub> (Alternative Hypothesis):</b> Twitter sentiments do influence the number of COVID-19 cases in New Jersey counties.</li>
+          <ul>
+            <li>In other words, counties with a greater negative-to-positive sentiment ratio will have more COVID-19 cases than counties with a greater positive-to-negative sentiment ratio.</li>
+          </ul>
+        </ul>
+        <hr>
+        <h2>Method</h2>
+        <hr>
+        <ul>
+        <li><b>Collection Process:</b> To collect and analyze the sentiments of tweets, in addition to constructing choropleth maps, a Twitter Developer API access token was obtained, which was then utilized through the R language.</li>
+        <ul>
+          <li><b>Environment:</b> R scripts were written in the RStudio integrated development environment (IDE), in which the following libraries were imported: NLP, twitteR, syuzhet, tm, ROAuth, and ggplot2.</li>
+          <li><b>Search Parameters:</b> Tweets were collected based on the presence of the “coronavirus” search term. This term was chosen over COVID-19, due to greater tweet availability. The collected tweets were limited to the 04/12/2020-04/18/2020 time frame. 150 tweets were collected for each county, in English. The search process was conducted a total of 21 times, accommodating each of the 21 counties in New Jersey. To differentiate between the tweets, the geocode (latitude and longitude) of each county were used as an additional search argument (reference “Code” for structure). To calculate the appropriate radius of collection, the area of each county was collected and subsequently used as a final search parameter within the searchTwitter function.</li>
+        </ul>
+        <li><b>Data Cleaning:</b> Prior to sentiment analysis, the raw tweets went through several rounds of text cleaning, including the removal of all URLs, punctuation, usernames, and stop words. This was so that the sentiment analysis could focus solely on the true essence of a given tweet, increasing the likelihood of identifying either a positive or negative sentiment.</li>
+        <li><b>Omissions:</b> Despite the collected tweets being public, to protect user privacy, several considerations were made. Apart from geolocation and time series information, all usernames from tweet authors and mention replies were removed. Furthermore, the spreadsheets containing the raw tweets have not been posted to this website, nor any other online resource. Instead, these spreadsheets were securely deleted, after the sentiment analysis was successfully conducted.</li>
+        <li><b>Obstacles:</b> The number of tweets, or ‘n’ in the searchTwitter function, was limited to 150. This was done due to the lack of available tweets in particular geolocations. To remain consistent, 150 was the maximum n-value that allowed the searchTwitter function to collect tweets. This may be due to several reasons, not limited to a lack of active Twitter users in a county, Twitter users in a county not enabling tweet geocoding, population scarcity in particular counties, and a general ‘digital social’ disinterest in the subject matter.</li>
+        </ul>
+        <hr>
+        <h2>Areas for Future Research</h2>
+        <hr>
+        <p>Being able to recognize the impacts of social sentiments on community outbreaks has the potential to greatly impact the ways in which we go about outbreak case recognition. Although not statistically supported, this project has several routes of future expansion, of which some of the most prominent include:</p>
+        <ul>
+        <li><b>Platform Differentiation:</b> Expanding sentiment analysis efforts to different social media platforms increases the likelihood of determining the accuracy of digital social sentiments on outbreak case projections. Including ‘atypical social media platforms,’ such as forums, blogs, and town websites, with web scrapers and search engine-like crawlers, has the potential to uncover even more sentiment correlations among communities. This could prove fundamental in identifying growth trends and patterns, and potentially, patient-zeros.</li>
+        <li><b>Social Network Maps:</b> Identifying the spread of social sentiments across a community will not only reveal the source of particular sentiments, but also determine the influence of communities within a particular geographic region. Such mapping could allow investigators and researchers alike to recognize the very beginnings of an outbreak or significant event, proving invaluable to analytical and investigative efforts.</li>
+        <li><b>Artificial Intelligence, Automation, & Machine Learning:</b> Automating the sentiment analysis and tweet collection process, while also incorporating advanced computational ‘thinking,’ has the potential to increase predictive and correlative abilities, beyond the individual researcher level. Such innovations can undoubtedly handle a greater influx of social sentiment and geographic information, enabling researchers to expand this project’s search efforts to a global scale.</li>
+        </ul>
+        <hr>
+        <h2>Takeaways</h2>
+        <hr>
+        <p>Although this project does not statistically support a predictive model for tweet sentiments predicting New Jersey county case outbreaks, the methodology itself has much potential. Inconsistencies in tweet availability may have influenced the accuracy of this model, but do reveal interesting patterns. As evidence by the choropleth maps, sentiments, while not playing a direct role in case prediction, do characterize attitude similarities towards shared community experiences. Thus, perhaps the most revealing finding of this project was that the ways in which we react to events and interact with each other have the potential to shape our communal attitudes towards shared obstacles. Perhaps with the right communal attitude, even the most insurmountable obstacles can be overcome.<em> I’ll leave that hypothesis for another study. </em></p>
+      </div>
+    </div>
+  </div>
+  <!-- Main End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

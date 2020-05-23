@@ -1,0 +1,149 @@
+[
+    {
+        "id": "1",
+        "county_name": "Atlantic",
+        "geocode": "39.47, -74.64",
+        "area": "561",
+        "radius": "13"
+      },
+      {
+        "id": "2",
+        "county_name": "Bergen",
+        "geocode": "41.11, -74.20",
+        "area": "234",
+        "radius": "9"
+      },
+      {
+        "id": "3",
+        "county_name": "Burlington",
+        "geocode": "39.88, -74.67",
+        "area": "805",
+        "radius": "16"
+      },
+      {
+        "id": "4",
+        "county_name": "Camden",
+        "geocode": "39.92, -75.11",
+        "area": "222",
+        "radius": "8"
+      },
+      {
+        "id": "5",
+        "county_name": "Cape May",
+        "geocode": "39.08, -74.86",
+        "area": "255",
+        "radius": "9"
+      },
+      {
+        "id": "6",
+        "county_name": "Cumberland",
+        "geocode": "39.33, -75.13",
+        "area": "489",
+        "radius": "12"
+      },
+      {
+        "id": "7",
+        "county_name": "Essex",
+        "geocode": "40.79, -74.25",
+        "area": "126",
+        "radius": "6"
+      },
+      {
+        "id": "8",
+        "county_name": "Gloucester",
+        "geocode": "39.71, -75.14",
+        "area": "325",
+        "radius": "10"
+      },
+      {
+        "id": "9",
+        "county_name": "Hudson",
+        "geocode": "40.72, -74.05",
+        "area": "47",
+        "radius": "4"
+      },
+      {
+        "id": "10",
+        "county_name": "Hunterdon",
+        "geocode": "40.57, -74.92",
+        "area": "430",
+        "radius": "12"
+      },
+      {
+        "id": "11",
+        "county_name": "Mercer",
+        "geocode": "40.28, -74.70",
+        "area": "226",
+        "radius": "8"
+      },
+      {
+        "id": "12",
+        "county_name": "Middlesex",
+        "geocode": "40.44, -74.41",
+        "area": "311",
+        "radius": "10"
+      },
+      {
+        "id": "13",
+        "county_name": "Monmouth",
+        "geocode": "40.29, -74.15",
+        "area": "472",
+        "radius": "12"
+      },
+      {
+        "id": "14",
+        "county_name": "Morris",
+        "geocode": "40.79, -74.48",
+        "area": "469",
+        "radius": "12"
+      },
+      {
+        "id": "15",
+        "county_name": "Ocean",
+        "geocode": "39.87, -74.25",
+        "area": "636",
+        "radius": "14"
+      },
+      {
+        "id": "16",
+        "county_name": "Passaic",
+        "geocode": "41.03, -74.30",
+        "area": "185",
+        "radius": "8"
+      },
+      {
+        "id": "17",
+        "county_name": "Salem",
+        "geocode": "39.58, -75.36",
+        "area": "338",
+        "radius": "10"
+      },
+      {
+        "id": "18",
+        "county_name": "Somerset",
+        "geocode": "40.56, -74.61",
+        "area": "305",
+        "radius": "10"
+      },
+      {
+        "id": "19",
+        "county_name": "Sussex",
+        "geocode": "41.14, -74.69",
+        "area": "521",
+        "radius": "13"
+      },
+      {
+        "id": "20",
+        "county_name": "Union",
+        "geocode": "40.65, -74.29",
+        "area": "103",
+        "radius": "6"
+      },
+      {
+        "id": "21",
+        "county_name": "Warren",
+        "geocode": "40.86, -74.99",
+        "area": "358",
+        "radius": "11"
+      }
+]

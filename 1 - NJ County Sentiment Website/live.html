@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>COVID-19 Sentiments | Live</title>
+</head>
+<body>
+<!-- Navigation -->
+<div class="vertical-nav bgblack" id="sidebar">
+    <div class="py-4 px-3 mb-4 bgblack">
+      <div class="media d-flex align-items-center">
+        <div class="media-body">
+          <h4 class="m-0 text-light logoText"><a class="text-light" href="index.html">NJCOVIDSENTIMENTS</a></h4>
+          <p class="font-weight-light text-muted mb-0">Predicting COVID-19 Cases with Twitter</p>
+          <h6 class="font-weight-light text-muted" id="copyright">&copy; 2020 DS</h6>
+        </div>
+      </div>
+    </div>
+    <ul class="nav flex-column bgblack mb-0" id="navbar">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link" id="navLinks"><i class="fa fa-home mr-3 text-primary fa-fw"></i>Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="data.html" class="nav-link" id="navLinks"><i class="fa fa-database mr-3 text-primary fa-fw"></i>Data & Findings</a>
+      </li>
+      <li class="nav-item">
+        <a href="code.html" class="nav-link" id="navLinks"><i class="fa fa-terminal mr-3 text-primary fa-fw"></i>Code</a>
+      </li>
+      <li class="nav-item">
+        <a href="live.html" class="nav-link active" id="navLinks"><i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>Live Data</a>
+      </li>
+      <li class="nav-item">
+        <a href="references.html" class="nav-link" id="navLinks"><i class="fa fa-book mr-3 text-primary fa-fw"></i>References</a>
+      </li>
+    </ul>
+  </div>
+  <!-- Navigation End -->
+  <!-- Page content -->
+  <div class="page-content p-5" id="content">
+    <!-- Toggle button -->
+    <button id="sidebarCollapse" type="button" class="btn btn-dark bgblack rounded-pill shadow-sm px-3 mb-4"><i class="fa fa-bars mr-.5"></i></button>
+    <!-- Main -->
+    <div class="row text-black">
+      <div class="col-lg-11">
+        <h1>Official Dashboard from the State of New Jersey</h1>
+        <hr>
+        <!-- Back to top button -->
+        <a id="backToTop"></a>
+        <!-- Back to top button end -->
+        <p>The dashboard below is the most up-to-date and accredited source of official New Jersey COVID-19 statistics. This dashboard was obtained from the State of New Jersey website and embedded below.</p>
+        <div class="text-center">
+          <a href="https://www.nj.gov/health/cd/" target="_blank" class="btn btn-dark" role="button"><i class="fa fa-medkit"></i>  Learn More on NJ Health</a>
+        </div>
+        <hr>
+        <!-- https://www.nj.gov/health/cd/topics/covid2019_dashboard.shtml -->
+        <iframe class="text-center" width="100%" height="800px" src="https://maps.arcgis.com/apps/MapSeries/index.html?appid=c2efd1898e48452e83d7218329e953d7" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+  <!-- Main End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

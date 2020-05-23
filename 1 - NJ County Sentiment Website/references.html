@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>COVID-19 Sentiments | References</title>
+</head>
+<body>
+<!-- Navigation -->
+<div class="vertical-nav bgblack" id="sidebar">
+    <div class="py-4 px-3 mb-4 bgblack">
+      <div class="media d-flex align-items-center">
+        <div class="media-body">
+          <h4 class="m-0 text-light logoText"><a class="text-light" href="index.html">NJCOVIDSENTIMENTS</a></h4>
+          <p class="font-weight-light text-muted mb-0">Predicting COVID-19 Cases with Twitter</p>
+          <h6 class="font-weight-light text-muted" id="copyright">&copy; 2020 DS</h6>
+        </div>
+      </div>
+    </div>
+    <ul class="nav flex-column bgblack mb-0" id="navbar">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link" id="navLinks"><i class="fa fa-home mr-3 text-primary fa-fw"></i>Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="data.html" class="nav-link" id="navLinks"><i class="fa fa-database mr-3 text-primary fa-fw"></i>Data & Findings</a>
+      </li>
+      <li class="nav-item">
+        <a href="code.html" class="nav-link" id="navLinks"><i class="fa fa-terminal mr-3 text-primary fa-fw"></i>Code</a>
+      </li>
+      <li class="nav-item">
+        <a href="live.html" class="nav-link" id="navLinks"><i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>Live Data</a>
+      </li>
+      <li class="nav-item">
+        <a href="references.html" class="nav-link active" id="navLinks"><i class="fa fa-book mr-3 text-primary fa-fw"></i>References</a>
+      </li>
+    </ul>
+  </div>
+  <!-- Navigation End -->
+  <!-- Page content -->
+  <div class="page-content p-5" id="content">
+    <!-- Toggle button -->
+    <button id="sidebarCollapse" type="button" class="btn btn-dark bgblack rounded-pill shadow-sm px-3 mb-4"><i class="fa fa-bars mr-.5"></i></button>
+    <!-- Main -->
+    <div class="row text-black">
+      <div class="col-lg-11">
+        <h1>References</h1>
+        <hr>
+        <p>Below, you'll find all the references used for script development, the data set used for the Tableau visualization, and the embedded dashboard from the State of New Jersey website.</p>
+        <hr>
+        <!-- Back to top button -->
+        <a id="backToTop"></a>
+        <!-- Back to top button end -->
+        <table class="table table-hover table-dark table-responsive-md">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Ande, E. Making maps with R. <em>Eric Ande</em>. Retrieved from <a href="https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html">https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html</a></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Ankur. (2018). Plotting a heat map of Pennsylvania counties in R. <em>Github</em>. Retrieved from <a href="https://stackoverflow.com/questions/51463037/plotting-a-heat-map-of-pennsylvania-counties-in-r">https://stackoverflow.com/questions/51463037/plotting-a-heat-map-of-pennsylvania-counties-in-r</a></td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">CRAN R-Project. (2019). Sentiment analysis of Twitter data. <em>CRAN R-Project</em>. Retrieved from <a href="https://cran.r-project.org/web/packages/saotd/vignettes/saotd.html">https://cran.r-project.org/web/packages/saotd/vignettes/saotd.html</a></td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td colspan="2">Gentry, J. (2018). searchTwitter. <em>RDocumentation</em>. Retrieved from <a href="https://www.rdocumentation.org/packages/twitteR/versions/1.1.9/topics/searchTwitter">https://www.rdocumentation.org/packages/twitteR/versions/1.1.9/topics/searchTwitter</a></td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td colspan="2">Gitau, C. Twitter text analysis (text processing function). <em>Github</em>. Retrieved from <a href="https://gist.github.com/CateGitau/05e6ff80b2a3aaa58236067811cee44e">https://gist.github.com/CateGitau/05e6ff80b2a3aaa58236067811cee44e</a></td>
+            </tr>
+            <tr>
+              <th scope="row">6</th>
+              <td colspan="2">Kearney, M. (n.d.). lookup_coords. <em>RDocumentation</em>. Retrieved from <a href="https://www.rdocumentation.org/packages/rtweet/versions/0.7.0/topics/lookup_coords">https://www.rdocumentation.org/packages/rtweet/versions/0.7.0/topics/lookup_coords</a></td>
+            </tr>
+            <tr>
+              <th scope="row">7</th>
+              <td colspan="2"> New Jersey Health. New Jersey COVID-19 dashboard. <em>New Jersey Health</em>. Retrieved from <a href="https://maps.arcgis.com/apps/MapSeries/index.html?appid=c2efd1898e48452e83d7218329e953d7">https://maps.arcgis.com/apps/MapSeries/index.html?appid=c2efd1898e48452e83d7218329e953d7</a></td>
+            </tr>
+            <tr>
+              <th scope="row">8</th>
+              <td colspan="2">Rascia, T. Adding syntax highlighting to code snippets in a blog or website. <em>Tania Rascia</em>. Retrieved from <a href="https://www.taniarascia.com/adding-syntax-highlighting-to-code-snippets/">https://www.taniarascia.com/adding-syntax-highlighting-to-code-snippets/</a></td>
+            </tr>
+            <tr>
+              <th scope="row">9</th>
+              <td colspan="2">Singh, V. (2020). Project guidance and Twitter sentiment anlaysis. <em>Design, Understand, and Build Social Media - Rutgers University</em>. Retrieved from <a href="https://wp.comminfo.rutgers.edu/vsingh/">https://wp.comminfo.rutgers.edu/vsingh/</a></td>
+            </tr>
+            <tr>
+              <th scope="row">10</th>
+              <td colspan="2">Sipra, V. (2020). Twitter sentiment analysis and visualization using R. <em>Towards Data Science – Medium</em>. Retrieved from <a href="https://towardsdatascience.com/twitter-sentiment-analysis-and-visualization-using-r-22e1f70f6967">https://towardsdatascience.com/twitter-sentiment-analysis-and-visualization-using-r-22e1f70f6967</a></td>
+            </tr>
+            <tr>
+              <th scope="row">11</th>
+              <td colspan="2">The New York Times. (2020). Coronavirus (Covid-19) data in the United States. <em>The New York Times – Github</em>. Retrieved from <a href="https://github.com/nytimes/covid-19-data ">https://github.com/nytimes/covid-19-data</a></td>
+            </tr>
+            <tr>
+              <th scope="row">12</th>
+              <td colspan="2">Twitter. (2020). Twitter developer docs (Twitter API). <em>Twitter Developer</em>. Retrieved from <a href="https://developer.twitter.com/en/docs">https://developer.twitter.com/en/docs</a></td>
+            </tr>
+            <tr>
+              <th scope="row">13</th>
+              <td colspan="2">University of Virginia. (2019). An introduction to analyzing Twitter data with R. <em>University of Virginia Library – Github</em>. Retrieved from <a href="https://uvastatlab.github.io/2019/05/03/an-introduction-to-analyzing-twitter-data-with-r/">https://uvastatlab.github.io/2019/05/03/an-introduction-to-analyzing-twitter-data-with-r/</a></td>
+            </tr>
+            <tr>
+              <th scope="row">14</th>
+              <td colspan="2">Van den Rul, C. (2019). A guide to mining and analyzing tweets with R. <em>Towards Data Science – Medium</em>. Retrieved from <a href="https://towardsdatascience.com/a-guide-to-mining-and-analysing-tweets-with-r-2f56818fdd16">https://towardsdatascience.com/a-guide-to-mining-and-analysing-tweets-with-r-2f56818fdd16</a></td>
+            </tr>
+            <tr>
+              <th scope="row">15</th>
+              <td colspan="2">Wassner, L. & Farmer, C. (2019). Text mining Twitter data with TidyText in R. <em>Earth Lab</em>. Retrieved from <a href="https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/text-mining-twitter-data-intro-r/">https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/text-mining-twitter-data-intro-r/</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Main End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

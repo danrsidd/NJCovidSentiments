@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link href="./style/prism.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>COVID-19 Sentiments | Code</title>
+</head>
+<body>
+<!-- Navigation -->
+<div class="vertical-nav bgblack" id="sidebar">
+    <div class="py-4 px-3 mb-4 bgblack">
+      <div class="media d-flex align-items-center">
+        <div class="media-body">
+          <h4 class="m-0 text-light logoText"><a class="text-light" href="index.html">NJCOVIDSENTIMENTS</a></h4>
+          <p class="font-weight-light text-muted mb-0">Predicting COVID-19 Cases with Twitter</p>
+          <h6 class="font-weight-light text-muted" id="copyright">&copy; 2020 DS</h6>
+        </div>
+      </div>
+    </div>
+    <ul class="nav flex-column bgblack mb-0" id="navbar">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link" id="navLinks"><i class="fa fa-home mr-3 text-primary fa-fw"></i>Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="data.html" class="nav-link" id="navLinks"><i class="fa fa-database mr-3 text-primary fa-fw"></i>Data & Findings</a>
+      </li>
+      <li class="nav-item">
+        <a href="code.html" class="nav-link active" id="navLinks"><i class="fa fa-terminal mr-3 text-primary fa-fw"></i>Code</a>
+      </li>
+      <li class="nav-item">
+        <a href="live.html" class="nav-link" id="navLinks"><i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>Live Data</a>
+      </li>
+      <li class="nav-item">
+        <a href="references.html" class="nav-link" id="navLinks"><i class="fa fa-book mr-3 text-primary fa-fw"></i>References</a>
+      </li>
+    </ul>
+  </div>
+  <!-- Navigation End -->
+  <!-- Page content -->
+  <div class="page-content p-5" id="content">
+    <!-- Toggle button -->
+    <button id="sidebarCollapse" type="button" class="btn btn-dark bgblack rounded-pill shadow-sm px-3 mb-4"><i class="fa fa-bars mr-.5"></i></button>
+    <!-- Main -->
+    <div class="row text-black">
+      <div class="col-lg-11">
+        <h1>R Scripts for Twitter Sentiment Analysis</h1>
+        <hr>
+        <p>This project's Twitter sentiment analysis was completed using the R language and accompanying libraries. Below, you'll find the two scripts responsible for Tweet collection, sentiment analysis, and sentiment visualizations.</p>
+        <div class="text-center">
+            <a href="https://github.com/danrsidd/COVID19_Tweet_Sentiments_NJ" target="_blank" class="btn btn-dark" role="button"><i class="fa fa-github-square"></i> View on My Github</a>
+        </div>
+        <hr>
+        <!-- Back to top button -->
+        <a id="backToTop"></a>
+        <!-- Back to top button end -->
+        <p>The following R script is primarily responsible for connecting to the Twitter API, collecting tweets, refining them, calculating their sentiments, and creating sentiment visualizations in the form of bar plots.</p>
+        <pre>
+            <code class="language-r">
+# Load required R packages
+library(NLP)
+library(twitteR)
+library(syuzhet)
+library(tm)
+library(ROAuth)
+library(ggplot2)
+
+setwd(dir=“XXXX”)
+
+# Input credentials and establish Twitter connection
+consumer_key <- “XXXX”
+consumer_secret <- “XXXX”
+access_token <- “XXXX”
+access_secret <- “XXXX”
+setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+
+# Search Twitter with search term, number of Tweets, language, geocode, and date range
+tweets_covid <- searchTwitter("coronavirus", n=150,lang = "en", 
+                geocode = “[INSERT LAT],[INSERT LONG],[INSERT RADIUS]”, 
+                since=“DATE”, until=“DATE”)
+covid_text<- covid_df$text
+
+# Create text corpus based on the text of collected Tweets
+covidCorpus <- Corpus(VectorSource(covid_df$text))
+
+#Format text prior to analysis
+
+# Make lowercase
+covidCorpus <- tm_map(covidCorpus, content_transformer(tolower))
+
+# Remove numbers
+covidCorpus <- tm_map(covidCorpus, removeNumbers)
+
+# Remove punctuation
+covidCorpus <- tm_map(covidCorpus, removePunctuation)
+
+# Remove whitespace
+covidCorpus <- tm_map(covidCorpus, stripWhitespace)
+
+# Read from large list of stopwords (Developed from NLTK's list of english stopwords - Github)
+tweetStopwords <- readLines("stopwords-big")
+
+# Remove stopwords from Tweets
+covidCorpus <- tm_map(covidCorpus,removeWords,tweetStopwords)
+
+# Partial processing function from CateGitau (Github)
+Textprocessing <- function(x)
+{gsub("http[[:alnum:]]*",'', x)
+  gsub('http\\S+\\s*', '', x) ## Remove URLs
+  gsub('#\\S+', '', x) ## Remove Hashtags
+  gsub('@\\S+', '', x) ## Remove Mentions
+  gsub('[[:cntrl:]]', '', x) ## Remove Controls and special characters
+  gsub("\\d", '', x) ## Remove Controls and special characters
+}
+covidCorpus <- tm_map(covidCorpus,Textprocessing)
+
+# Associate sentiments and caluclate sentiment score
+mysentiment_covid<-get_nrc_sentiment((covid_text))
+Sentimentscores_covid<-data.frame(colSums(mysentiment_covid[,]))
+
+# Sentiment name formatting
+names(Sentimentscores_covid)<-"Score"
+Sentimentscores_covid<-cbind("sentiment"=rownames(Sentimentscores_covid),Sentimentscores_covid)
+rownames(Sentimentscores_covid)<-NULL
+
+# View the head of available sentiments
+head(Sentimentscores_covid)
+
+# Plot barplot of only positive and negative sentiments and add count on top of each bar
+ggplot(data=Sentimentscores_covid[9:10,],aes(x=sentiment,y=Score))
+  +geom_bar(aes(fill=sentiment),stat = "identity")
+  +theme(legend.position="none")
+  +xlab("Sentiment")+ylab("Score")
+  +ggtitle("Sentiments of Tweets on Coronavirus: [Insert County Name & Date Range Here]") 
+  +geom_text(stat='identity', aes(label=Score), vjust=-1)
+            </code>
+        </pre>
+        <hr>
+        <p>The next R script makes use of the positive and negative sentiment counts calculated by the above script. With these counts, this script creates choropleth maps (commonly known as heat maps), to visually differentiate positive and negative sentiment densities between New Jersey counties.</p>
+        <pre>
+          <code class="language-r">
+# Load map data and plotting packages
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(mapdata)
+
+# Grab state data and begin to create base state map
+usa <- map_data("usa")
+states <- map_data("state")
+nj_df <- subset(states, region == "new jersey")
+counties <- map_data("county")
+nj_county <- subset(counties, region == "new jersey")
+
+# Plot base state map and county borders
+nj_base <- ggplot(data = nj_df, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(color = "black", fill = "gray")
+nj_base + theme_nothing()
+
+nj_base + theme_nothing() + 
+  geom_polygon(data = nj_county, fill = NA, color = "white") +
+  geom_polygon(color = "black", fill = NA)
+
+# Read spreadsheet with count values (Pos/Neg Tweet Sentiments)
+setwd("[INSERT FILEPATH HERE]")
+nj_sent<-read.csv("NJCountyMap.csv")
+
+# Merge datasets by county column (renamed to subregion)
+njtwt <- merge(nj_county, nj_sent, by = "subregion")
+
+# Plot Positive Tweet Sentiments Choropleth Map
+nj_pos_map <- nj_base + 
+  geom_polygon(data = njtwt, aes(fill = positive_sentiments), color = "white") +
+  geom_polygon(color = "black", fill = NA)
+  +scale_fill_gradient(low="green", high="darkgreen")+theme_bw()
+  +ggtitle("Positive Tweet Sentiments in New Jersey, by County")
+
+nj_pos_map + labs(fill ="# of Tweets")
+
+# Plot Negative Tweet Sentiments Choropleth Map
+nj_neg_map <- nj_base + 
+  geom_polygon(data = njtwt, aes(fill = negative_sentiments), color = "white")
+  +geom_polygon(color = "black", fill = NA) 
+  +scale_fill_gradient(low="red", high="darkred")
+  +theme_bw()+ggtitle("Negative Tweet Sentiments in New Jersey, by County")
+
+nj_neg_map + labs(fill ="# of Tweets")            
+          </code>
+      </pre>
+      </div>
+    </div>
+  </div>
+  <!-- Main End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/prism.js"></script>
+
+
+</body>
+</html>

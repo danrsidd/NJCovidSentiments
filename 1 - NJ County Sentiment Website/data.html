@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>COVID-19 Sentiments | Data</title>
+</head>
+<body>
+<!-- Navigation -->
+<div class="vertical-nav bgblack" id="sidebar">
+    <div class="py-4 px-3 mb-4 bgblack">
+      <div class="media d-flex align-items-center">
+        <div class="media-body">
+          <h4 class="m-0 text-light logoText"><a class="text-light" href="index.html">NJCOVIDSENTIMENTS</a></h4>
+          <p class="font-weight-light text-muted mb-0">Predicting COVID-19 Cases with Twitter</p>
+          <h6 class="font-weight-light text-muted" id="copyright">&copy; 2020 DS</h6>
+        </div>
+      </div>
+    </div>
+    <ul class="nav flex-column bgblack mb-0" id="navbar">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link" id="navLinks"><i class="fa fa-home mr-3 text-primary fa-fw"></i>Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="data.html" class="nav-link active" id="navLinks"><i class="fa fa-database mr-3 text-primary fa-fw"></i>Data & Findings</a>
+      </li>
+      <li class="nav-item">
+        <a href="code.html" class="nav-link" id="navLinks"><i class="fa fa-terminal mr-3 text-primary fa-fw"></i>Code</a>
+      </li>
+      <li class="nav-item">
+        <a href="live.html" class="nav-link" id="navLinks"><i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>Live Data</a>
+      </li>
+      <li class="nav-item">
+        <a href="references.html" class="nav-link" id="navLinks"><i class="fa fa-book mr-3 text-primary fa-fw"></i>References</a>
+      </li>
+    </ul>
+  </div>
+  <!-- Navigation End -->
+  <!-- Page content -->
+  <div class="page-content p-5" id="content">
+    <!-- Toggle button -->
+    <button id="sidebarCollapse" type="button" class="btn btn-dark bgblack rounded-pill shadow-sm px-3 mb-4"><i class="fa fa-bars mr-.5"></i></button>
+    <!-- Main -->
+    <div class="row text-black">
+      <div class="col-lg-11">
+        <h1>Data and Findings</h1>
+        <hr>
+        <p>The information below consists of county geocode specifics, a Tableau visualization depicting the number of cases during the Tweet collection period, and a findings menu containing statistical analysis from SPSS, choropleth (heat) maps from R, and individual county sentiment analysis.</p>
+        <hr>
+        <!-- Back to top button -->
+        <a id="backToTop"></a>
+        <!-- Back to top button end -->
+        <!-- Table Start -->
+        <table class="table table-hover table-striped table-dark table-responsive-md" id="county_table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">County</th>
+              <th scope="col">Geocode</th>
+              <th scope="col">Area</th>
+              <th scope="col">Radius</th>
+            </tr>
+          </thead>
+        </table>
+        <!-- Table End -->
+        <hr>
+        <!-- Tableau State Visualization -->
+        <div class='tableauPlaceholder text-center' id='viz1587333133619' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vi&#47;VisualizationsNJ&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='views&#47;VisualizationsNJ&#47;Sheet1?:embed=y&amp;:display_count=y&amp;publish=yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vi&#47;VisualizationsNJ&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div><script type='text/javascript'>var divElement = document.getElementById('viz1587333133619');var vizElement = divElement.getElementsByTagName('object')[0];vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';var scriptElement = document.createElement('script');scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+        <!--Tableau State Visualization End -->
+        <hr>
+<!-- County Findings -->
+<div class="accordion" id="accordionCounty">
+
+  <div class="correlations">
+    <div class="card-header" id="headingCorrelations">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseCorrelations" aria-expanded="false" aria-controls="collapseCorrelations">
+          Statistical Analysis
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseCorrelations" class="collapse" aria-labelledby="headingCorrelations" data-parent="#accordionCounty">
+      <div class="card-body">
+        <div class="text-center col-sm-12 col-md-12 col-xl-12">
+        <img src="./images/SPSS/coefficients.png" alt="Coefficients" class="stats_img img-thumbnail col-sm-6">
+        <img src="./images/SPSS/correlations.png" alt="Correlations" class="stats_img img-thumbnail col-sm-6">
+        <img src="./images/SPSS/modelsumm.png" alt="Model Summary (Linear Regression)" class="stats_img img-thumbnail col-sm-6">
+        <img src="./images/SPSS/normalbar.png" alt="Normal Distribution (Positive Skew)" class="stats_img img-thumbnail col-sm-6">
+        </div>
+        <br>
+        <div class="col-sm-12 col-md-12 col-xl-12">
+          After SPSS bivariate correlation and linear regression modeling, several key insights were revealed (To view any of the SPSS results in greater detail, click on any of the images above to expand.). Through bivariate correlation, both positive and negative tweet sentiments maintained a significance (p) value greater than the established 0.05 critical value, indicating weak evidence against the null hypothesis, thus failing to reject the null hypothesis. In other words, these values also indicate greater coincidence over correlative genuineness. Similarly, the correlation (r) values of both positive and negative tweet sentiment counts indicate a more scattered and less linear-like relationship. Although, its positive direction indicates that the dependent ‘case’ variable increases as the independent sentiment variables increase. Approaching the r-square value, the lower value indicates that tweet sentiments predict only 11.4% of the variance of the dependent variable (number of cases), indicating a weaker (more scattered) fit of the regression line. Given the positive skew of the distribution plot, it appears that the method’s weakness - the number of tweets collected in each county - resulted in lower bounds affecting the overall skew of the distribution. This can be accredited to both potential limitations in the Twitter search methodology used, in addition to a lack of COVID-19, or “coronavirus” related tweets in a given county.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map">
+    <div class="card-header" id="headingMap">
+      <h2 class="mb-0 text-center">
+        <button class="btn text-white" type="button" data-toggle="collapse" data-target="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
+          Sentiment Choropleth Maps
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseMap" class="collapse" aria-labelledby="headingMap" data-parent="#accordionCounty">
+      <div class="card-body">
+        <div class="text-center col-sm-12 col-md-12 col-xl-12">
+        <img src="./images/nj_pos_sent.png" alt="New Jersey Positive Tweet Sentiments, by County" class="stats_img img-thumbnail">
+        <img src="./images/nj_neg_sent.png" alt="New Jersey Negative Tweet Sentiments, by County" class="stats_img img-thumbnail">
+        </div>
+        <br>
+        <div class="col-sm-12 col-md-12 col-xl-12">
+          The above choropleth maps (better known as heat maps) depict the positive and negative tweet sentiment count densities by county. Together, these maps reveal two interesting occurrences. In approaching the positive tweet sentiments choropleth map, the greatest count density is primarily evident in the southern region of the state. Examining the Tableau county case visualization above, this positive sentiment is consistent with a smaller number of confirmed cases in the same subregion. Peculiarly, the negative sentiment counts are also largely concentrated in a similar subregion, apart from a few counties in northern regions of the state. This finding could be consistent with some of the near-equal sentiment ratios uncovered in the individual county analysis below. In such instances, certain counties exhibited a near identical positive and negative tweet sentiment count from the tweet sample in that area. This could indicate neutral attitudes or disagreements among the populations in these counties, thereby explaining the coexistence of the opposing densities depicted in the choropleth maps. Another possibility is that this finding is representative of the fairly uneven population distribution in the state. Much of New Jersey’s population is concentrated in the north, thus explaining the increased outbreak severity in the northern counties. The southern region of the state is far less populated in comparison, but contains the greatest density of COVID-19 tweet sentiments. To better test this hypothesis, additional tweet collection over a longer period in the COVID-19 pandemic would be required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0 text-center">
+        <button class="btn text-white" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Atlantic County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/atlantic.png" alt="Atlantic County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 99/104</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 99/382</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 52/191</p>
+        <p><b>Takeaways:</b> Atlantic County's positive and negative sentiments closely matched each other. The level of activity within this county resulted in tweet sentiment counts that exceeded state averages.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Bergen County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/bergen.png" alt="Bergen County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 44/59</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 44/12163</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 59/12163</p>
+        <p><b>Takeaways:</b> Bergen County's positive tweet sentiments exceeded its negative tweet sentiments. However,  the county remains among New Jersey's most infected counties, despite the prevalence of positive tweet sentiments.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Burlington County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/burlington.png" alt="Burlington County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 79/126</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 79/1456</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 9/104</p>
+        <p><b>Takeaways:</b> Burlington County is among New Jersey's largest counties in area, and is also among the states most positive with regard to tweet sentiments. Such an occurrence may be reflected in its lower-case count.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Camden County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/camden.png" alt="Camden County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 82/113</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 41/959</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 113/1918</p>
+        <p><b>Takeaways:</b> Camden County is among New Jersey's most economically adverse counties, but has positive tweet sentiments exceeding negative tweet sentiments. This is especially reassuring, given the smaller case count in comparison to other economically stronger counties.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Cape May County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/capemay.png" alt="Cape May County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 11/7</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 14/199</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 22/199</p>
+        <p><b>Takeaways:</b> Cape May County adheres to the intended predictive model, with its larger positive tweet sentiments count fostering case counts among New Jersey's lowest.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingSix">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          Cumberland County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/cumberland.png" alt="Cumberland County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 11/17</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 11/68</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 1/4</p>
+        <p><b>Takeaways:</b> Cumberland County mirrors trends in many of the other Southern New Jersey counties, with positive tweet sentiments overtaking negative tweet sentiments, and fewer cases in comparison to other counties.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingSeven">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          Essex County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/essex.png" alt="Essex County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 36/53</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 36/9901</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 53/9901</p>
+        <p><b>Takeaways:</b> Essex County, peculiarly, remains among New Jersey's most infected counties. Despite the greater count of positive tweet sentiments, this county ranks among the worst.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingEight">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          Gloucester County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/gloucester.png" alt="Gloucester County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 103/109</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 103/683</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 109/683</p>
+        <p><b>Takeaways:</b> Gloucester County's positive and negative tweet sentiments were very close, but exceeded the state county sentiment averages. At a near-equal ratio, the sentiments are clearly divided among the county.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingNine">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+          Hudson County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/hudson.png" alt="Hudson County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 5/8</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 85/9956</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 34/2489</p>
+        <p><b>Takeaways:</b> Hudson County, similar to other counties in the northern part of the state, exhibited a contradictory behavior. Despite the larger amount of positive tweet sentiments, the county is among the state's most infected.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+          Hunterdon County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/hunterdon.png" alt="Hunterdon County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 58/33</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 58/391</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 33/391</p>
+        <p><b>Takeaways:</b> Hunterdon County exhibits negative tweet sentiments at an almost 2:1 ratio. However, the county is also among the state’s least infected.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingEleven">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+          Mercer County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/mercer.png" alt="Mercer County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 39/70</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 39/2215</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 14/443</p>
+        <p><b>Takeaways:</b> Mercer County, located in the central portion of New Jersey, coincidentally ranks in the middle with regard to case severity. Its positive tweet sentiments greatly outweigh its negative ones.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwelve">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+          Middlesex County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/middlesex.png" alt="Middlesex County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 86/65</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 43/3812</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 65/7624</p>
+        <p><b>Takeaways:</b> Middlesex County, ranking among New jersey's most infected counties, adheres to the alternate hypothetical model, with negative tweet sentiment counts exceeding positive counts.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingThirteen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+          Monmouth County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/monmouth.png" alt="Monmouth County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 139/68</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 139/4528</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 17/1132</p>
+        <p><b>Takeaways:</b> Monmouth County possesses a large negative to positive tweet sentiment ratio. It has a case amount in the thousands and a ranking that nears the sates infection severity midpoint.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFourteen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+          Morris County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFourteen" class="collapse" aria-labelledby="headingFourteen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/morris.png" alt="Morris County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 10/33</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 5/996</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 11/664</p>
+        <p><b>Takeaways:</b> Morris County, with around a 3:1 positive to negative tweet sentiment ratio, ranks near the state's midpoint in infection severity. Given the county's location in the COVID-19 hotspot region, the ratio indicates a likelihood of sentiment effects on case counts.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFifteen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
+          Ocean County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFifteen" class="collapse" aria-labelledby="headingFifteen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/ocean.png" alt="Ocean County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 22/39</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 11/758</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 39/1516</p>
+        <p><b>Takeaways:</b> Ocean County, New Jersey's second largest county in area, exhibits a sentiment ratio moderately consistent with the alternative hypothetical model. Its positive tweet sentiments are noticeably larger in count than negative tweet sentiments.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingSixteen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
+          Passaic County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSixteen" class="collapse" aria-labelledby="headingSixteen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/passaic.png" alt="Passaic County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 43/57</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 43/3968</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 57/3968</p>
+        <p><b>Takeaways:</b> Passaic County possesses a near 3:2 positive to negative tweet sentiment ratio. Despite this occurrence, the county is located in a COVID-19 hotspot cluster in the state's northern region. Even with economic disadvantages, it avoids the top rank in outbreak severity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingSeventeen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
+          Salem County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSeventeen" class="collapse" aria-labelledby="headingSeventeen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/salem.png" alt="Salem County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 11/7</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 11/105</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 1/15</p>
+        <p><b>Takeaways:</b> Salem County is among the state's lowest in outbreak count, but possesses an 11:7 negative to positive tweet sentiment ratio. This may largely be due to the lack of COVID-19 related tweets in the area, given that it is the least populous county in the state.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingEighteen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">
+          Somerset County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEighteen" class="collapse" aria-labelledby="headingEighteen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/somerset.png" alt="Somerset County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 67/75</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 67/2283</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 25/761</p>
+        <p><b>Takeaways:</b> Somerset County, with a near 8:7 positive to negative tweet sentiment ratio, adheres to the alternative hypothetical model. Its case outbreak count ranks on the lower end of the state's outbreak severity midpoint.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingNineteen">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseNineteen" aria-expanded="false" aria-controls="collapseNineteen">
+          Sussex County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseNineteen" class="collapse" aria-labelledby="headingNineteen" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/sussex.png" alt="Sussex County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 41/62</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 41/626</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 31/313</p>
+        <p><b>Takeaways:</b> Sussex County, with an approximate 3:2 positive to negative tweet sentiment ratio, adheres to the alternative hypothetical model. It ranks among the state's lowest in infection severity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwenty">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
+          Union County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwenty" class="collapse" aria-labelledby="headingTwenty" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/union.png" alt="Union County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 14/37</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 56/8959</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 148/8959</p>
+        <p><b>Takeaways:</b> Union County, despite its significant 37:14 positive to negative tweet sentiment ratio, does not remain consistent with the alternative hypothetical model. It ranks among the state's worst in county outbreak severity, despite its significant positive tweet sentiment count.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwentyOne">
+      <h2 class="mb-0 text-center">
+        <button class="btn collapsed text-white" type="button" data-toggle="collapse" data-target="#collapseTwentyOne" aria-expanded="false" aria-controls="collapseTwentyOne">
+          Warren County
+          <br>
+          <i class="fa fa-chevron-circle-up"></i>
+          <i class="fa fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwentyOne" class="collapse" aria-labelledby="headingTwentyOne" data-parent="#accordionCounty">
+      <div class="card-body">
+        <img src="./images/warren.png" alt="Warren County Twitter Sentiments" class="findings_img img-thumbnail">
+        <p><b>Negative Sentiment to Positive Sentiment Ratio:</b> 37/41</p>
+        <p><b>Negative Sentiment to County Case Ratio:</b> 37/543</p>
+        <p><b>Positive Sentiment to County Case Ratio:</b> 41/543</p>
+        <p><b>Takeaways:</b> Warren County, with a near 1:1 positive to negative tweet sentiment ratio, exhibits sentiment similarities similar to other large counties. Despite this, it ranks among the state's lowest in county outbreak severity.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+<!-- Modal End -->
+<!-- County Findings End -->
+      </div>
+    </div>
+  </div>
+  <!-- Main End -->
+  <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./js/index.js"></script>
+  <!-- Scripts End -->
+</body>
+</html>
+
+<script>
+  $(document).ready(function(){
+    $.getJSON("./data/counties.json", function(data){
+      var county_data = '';
+      $.each(data, function(key, value){
+        county_data += '<tr>';
+        county_data += '<td>'+value.id+'</td>';
+        county_data += '<td>'+value.county_name+'</td>';
+        county_data += '<td>'+value.geocode+'</td>';
+        county_data += '<td>'+value.area+'</td>';
+        county_data += '<td>'+value.radius+'</td>';
+        county_data += '</tr>';
+      });
+      $('#county_table').append(county_data);
+    });
+  });
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the images and bind an onclick event on each to insert it inside the modal
+// use its "alt" text as a caption
+var images = document.querySelectorAll(".img-thumbnail");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+for(let i = 0; i < images.length; i++){
+  images[i].onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script>
